@@ -46,7 +46,7 @@ public class StatsdReporterTest {
 
     protected AbstractPollingReporter createReporter(MetricsRegistry registry, Clock clock) throws Exception {
         final DatagramSocket socket = mock(DatagramSocket.class);
-        final StatsdReporter.UDPSocketProvider provider = mock(StatsdReporter.UDPSocketProvider.class);
+        final UDPSocketProvider provider = mock(UDPSocketProvider.class);
         when(provider.get()).thenReturn(socket);
         when(provider.newPacket(any(ByteArrayOutputStream.class))).thenReturn(packet);
 

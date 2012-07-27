@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
 import java.util.Locale;
 import java.util.Map;
 import java.util.SortedMap;
@@ -32,11 +31,6 @@ public class StatsdReporter extends AbstractPollingReporter implements MetricPro
     protected ByteArrayOutputStream outputData;
 
     private boolean printVMMetrics = true;
-
-    public interface UDPSocketProvider {
-        DatagramSocket get() throws Exception;
-        DatagramPacket newPacket(ByteArrayOutputStream out);
-    }
 
     public StatsdReporter(String host, int port) throws IOException {
         this(Metrics.defaultRegistry(), host, port, null);
@@ -306,31 +300,4 @@ public class StatsdReporter extends AbstractPollingReporter implements MetricPro
         }
     }
 
-    public static class DefaultSocketProvider implements UDPSocketProvider {
-
-        private final String host;
-        private final int port;
-
-        public DefaultSocketProvider(String host, int port) {
-            this.host = host;
-            this.port = port;
-        }
-
-        @Override
-        public DatagramSocket get() throws Exception {
-            return new DatagramSocket(new InetSocketAddress(this.host, this.port));
-        }
-        
-        @Override
-        public DatagramPacket newPacket(ByteArrayOutputStream out) {
-            byte[] dataBuffer;
-            if (out != null) {
-                dataBuffer = out.toByteArray();
-            }
-            else {
-                dataBuffer = new byte[8192];
-            }
-            return new DatagramPacket(dataBuffer, dataBuffer.length);
-        }
-    }
 }

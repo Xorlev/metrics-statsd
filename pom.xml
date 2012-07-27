@@ -5,7 +5,7 @@
     <groupId>studyblue</groupId>
     <artifactId>metrics-statsd</artifactId>
     <name>Metrics Statsd Support</name>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -18,6 +18,12 @@
             <name>Sean Laurent</name>
             <email>organicveggie@gmail.com</email>
             <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Michael Rose</name>
+            <email>michael@fullcontact.com</email>
+            <organization>FullContact</organization>
+            <timezone>-7</timezone>
         </developer>
     </developers>
 
